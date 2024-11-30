@@ -1,16 +1,30 @@
-import { useState } from 'react'
+// import { useState } from 'react';
+import { Routes, Route, NavLink } from 'react-router';
 // import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+
+import Dashboard from './pages/Dashboard';
+import UserSettings from './pages/UserSettings';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        {/* <a href="https://react.dev" target="_blank">
+      <nav>
+        <NavLink to="/">Dashboard</NavLink>
+        <NavLink to="/user-settings">User settings</NavLink>
+      </nav>
+
+      <Routes>
+        <Route index element={<Dashboard />} />
+        <Route path="user-settings" element={<UserSettings />} />
+      </Routes>
+
+      {/* <div>
+        <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
-        </a> */}
+        </a>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
@@ -23,7 +37,7 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
     </>
   )
 }
