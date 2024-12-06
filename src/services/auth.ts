@@ -6,29 +6,20 @@ import {
   browserLocalPersistence
 } from 'firebase/auth';
 import { firebaseAuth } from '../firebase';
+import { ILoginProps, ISignupProps } from '../interfaces/user';
 
 setPersistence(firebaseAuth, browserLocalPersistence);
 
-export interface ILoginProps {
-  email: string;
-  password: string;
- }
- 
- export interface ISignUpProps {
-  email: string;
-  password: string;
- }
-
-export const firebaseSignIn = async ({ email, password }: ILoginProps) => {
+export const firebaseSignIn = async({ email, password }: ILoginProps) => {
   const result = await signInWithEmailAndPassword(firebaseAuth, email, password);
   return result;
 };
 
-export const firebaseSignUp = async ({ email, password }: ISignUpProps) => {
-  const  result = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+export const firebaseSignUp = async({ email, password }: ISignupProps) => {
+  const result = await createUserWithEmailAndPassword(firebaseAuth, email, password);
   return result;
 };
 
-export const firebaseSignOut  =  async () => {
-  await  signOut(firebaseAuth);
+export const firebaseSignOut = async() => {
+  await signOut(firebaseAuth);
 };

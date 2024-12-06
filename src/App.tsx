@@ -1,24 +1,60 @@
-// import { useState } from 'react';
-import { Routes, Route, NavLink } from 'react-router';
+import { useEffect } from 'react';
+import { Routes, Route } from 'react-router';
 // import reactLogo from './assets/react.svg'
 import './App.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from './firebase';
 
 import Dashboard from './pages/Dashboard';
 import UserSettings from './pages/UserSettings';
+import SignupPage from './pages/Signup';
+import LoginPage from './pages/LoginPage';
+import AuthProtectedRoute from './AuthProtectedRoute';
+import useAuthStore from './stores/useAuth';
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const { user } = useAuthStore();
+  // const navigate = useNavigate()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(firebaseAuth, async(user) => {
+      console.log(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  // useEffect(() => {
+  //     const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
+  //       console.log(user);
+  //       // if (!user) {
+  //       //   // go to login page if user doesn't exist
+  //       //   // setLoading(false)
+  //       //   // navigate('/login')
+  //       // } else {
+  //       //   // setUser(user)
+  //       //   // setToken(await user?.getIdToken())
+  //       // }
+  //     });
+
+  //     return () => {
+  //       unsubscribe()
+  //     }
+  //   }, []);
+  // }
 
   return (
     <>
-      <nav>
-        <NavLink to="/">Dashboard</NavLink>
-        <NavLink to="/user-settings">User settings</NavLink>
-      </nav>
-
       <Routes>
-        <Route index element={<Dashboard />} />
-        <Route path="user-settings" element={<UserSettings />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+
+        <Route element={<AuthProtectedRoute />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/user-settings" element={<UserSettings />} />
+        </Route>
       </Routes>
 
       {/* <div>
