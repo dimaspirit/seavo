@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+
 import { firebaseSignOut } from "../services/auth";
+import useAuthStore from "../stores/useAuth";
 
 function SettingsPage() {
+  const {user} = useAuthStore();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,9 +21,12 @@ function SettingsPage() {
 
   return (
     <>
-      <NavLink to="/">Dashboard</NavLink>
-      <h1>Settings</h1>
-      <button onClick={handleLogout} disabled={isLoading}>Log out</button>
+      <div className="container-fluid">
+        <NavLink to="/">Dashboard</NavLink>
+        <h1>Settings</h1>
+        <p>You logged as {user?.email};</p>
+        <button onClick={handleLogout} disabled={isLoading}>Log out</button>
+      </div>
     </>
   )
 };
