@@ -1,6 +1,8 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   const applications = [{
     status: 'Wishlist',
     title: 'Javascript Web Developer',
@@ -31,7 +33,15 @@ function Dashboard() {
       amount: '',
       frequency: '', // hour, day, week, month, year
     },
+    // contacts: { ???
+    //   name: '',
+    //   email: '',
+    // }
   }];
+
+  const handleCreateNewApplication = () => {
+    navigate('/application/new');
+  }
 
   return (
     <>
@@ -40,7 +50,7 @@ function Dashboard() {
         <h1>Dashboard</h1>
 
         <p>
-          <button>Create a new application</button>
+          <button onClick={handleCreateNewApplication}>Create a new application</button>
         </p>
 
         <div>

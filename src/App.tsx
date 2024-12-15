@@ -10,6 +10,8 @@ import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/Signup';
 import LoginPage from './pages/LoginPage';
 import AuthProtectedRoute from './AuthProtectedRoute';
+import ApplicationNewPage from './pages/ApplicationNewPage';
+
 import useAuthStore from './stores/useAuth';
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
         <Route element={<AuthProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/application/new" element={<ApplicationNewPage />} />
         </Route>
       </Routes>}
 
