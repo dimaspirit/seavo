@@ -22,10 +22,20 @@ function SettingsPage() {
   return (
     <>
       <div className="container-fluid">
-        <NavLink to="/">Dashboard</NavLink>
-        <h1>Settings</h1>
-        <p>You logged as {user?.email};</p>
-        <button onClick={handleLogout} disabled={isLoading}>Log out</button>
+        <nav>
+          <ul>
+            <li><strong>SEAVO</strong></li>
+          </ul>
+          <ul>
+            <li><NavLink to="/" className={'contrast'}>Dashboard</NavLink></li>
+            <li><NavLink to="/settings" className={'contrast'}>Settings</NavLink></li>
+          </ul>
+        </nav>
+
+        <main>
+          <p>You logged as {user?.email};</p>
+          <button onClick={handleLogout} disabled={isLoading}>Log out</button>
+        </main>
       </div>
     </>
   )

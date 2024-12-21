@@ -17,6 +17,7 @@ function ApplicationNewPage() {
     responsibilities: '',
     salary: '',
     createdBy: '',
+    url: '',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -36,13 +37,17 @@ function ApplicationNewPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    if(!user) return;
+    const position = formProps.position.trim();
+
+    if(!user || position === '') return;
 
     // TODO: Clean up props (trim) 
     // TODO: check errors
     const data:IApplication = {
       ...formProps,
       createdBy: user.uid,
+      status: 0,
+      notes: '',
     }
 
     createNewApplication(data)
@@ -64,6 +69,11 @@ function ApplicationNewPage() {
       <article>
         <form className="card" onSubmit={handleCreateApplication}>
           <fieldset>
+            <label>
+              URL
+              <input type="url" name="url" value={formProps.url} onChange={(e) => handleSetInputFormProps(e, 'url')} />
+            </label>
+
             <label>
               Position
               <input type="text" name="position" placeholder="e.x. Software engineer" value={formProps.position} onChange={(e) => handleSetInputFormProps(e, 'position')} />
