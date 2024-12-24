@@ -1,14 +1,14 @@
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { getApplications } from "../services/applications";
 import useAuthStore from "../stores/useAuth";
 import { IApplication } from "../interfaces/applications";
 
-type ApplicationView = 'table' | 'card';
+// type ApplicationView = 'table' | 'card';
 
 function Dashboard() {
   const { user } = useAuthStore();
-  const [applicationsView, setApplicationsView] = useState<ApplicationView>('table')
+  // const [applicationsView, setApplicationsView] = useState<ApplicationView>('table')
   const navigate = useNavigate();
 
   const [applications, setApplications] = useState<IApplication[]>([]);
@@ -17,9 +17,9 @@ function Dashboard() {
     navigate('/application/new');
   }
 
-  const onViewChange = (e:ChangeEvent<HTMLSelectElement>) => {
-    setApplicationsView(e.target.value as ApplicationView);
-  }
+  // const onViewChange = (e:ChangeEvent<HTMLSelectElement>) => {
+  //   setApplicationsView(e.target.value as ApplicationView);
+  // }
 
   useEffect(() => {
     if(user?.uid) {
@@ -48,15 +48,15 @@ function Dashboard() {
           </p>
 
           <div>
-            <div>
+            {/* <div>
               Switch between table and cards
               <select name="view" aria-label="Select type of view for applications: table or cards" onChange={onViewChange} >
                 <option value="table">Table</option>
                 <option value="cards">Cards</option>
               </select>
-            </div>
+            </div> */}
 
-            {applicationsView == 'table' && <table>
+            <table>
               <thead>
                 <tr>
                   <th scope="col">Position</th>
@@ -75,16 +75,16 @@ function Dashboard() {
                   </tr>
                 )}
               </tbody>
-            </table>}
+            </table>
 
-            {applicationsView == 'cards' && applications.map((application, i) =>
+            {/* {applicationsView == 'cards' && applications.map((application, i) =>
               <article key={`application-card${i}`}>
                 {application.status && <p><small>{application.status}</small></p>}
                 {application.companyName && <p><small>{application.companyName}</small></p>}
                 <h4>{application.position}</h4>
                 <a href={application.url} target="_blank">Vacancy</a>
               </article>
-            )}
+            )} */}
           </div>
         </main>
       </div>
