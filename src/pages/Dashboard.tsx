@@ -68,7 +68,7 @@ function Dashboard() {
               <tbody>
                 {applications.map((application, i) =>
                   <tr key={`application-table${i}`}>
-                    <th scope="row">{application.position}</th>
+                    <th scope="row"><NavLink to={`/application/${application.uid}`}>{application.position}</NavLink></th>
                     <td><a href={application.url} target="_blank">Vacancy</a></td>
                     <td>{application.status && application.status}</td>
                     <td>{application.companyName && application.companyName}</td>

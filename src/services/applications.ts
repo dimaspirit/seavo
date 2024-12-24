@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore"; 
+import { collection, doc, setDoc, serverTimestamp, query, where, getDocs, getDoc } from "firebase/firestore"; 
 import { firebaseDB } from '../firebase';
 import { IApplication } from '../interfaces/applications';
 
@@ -22,4 +22,17 @@ export const getApplications = async(userUID:string) => {
     applications.push(doc.data() as IApplication);
   });
   return applications;
+}
+
+export const getApplicationByUID = async(uid:string) => {
+  const applicationRef = doc(firebaseDB, DB_NAME, uid);
+  const applicationSnap = await getDoc(applicationRef);
+
+  if (applicationSnap.exists()) {
+    return applicationSnap.data() as IApplication;
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.warn("No such document!");
+    return null;
+  }
 }

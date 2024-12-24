@@ -11,6 +11,7 @@ import SignupPage from './pages/Signup';
 import LoginPage from './pages/LoginPage';
 import AuthProtectedRoute from './AuthProtectedRoute';
 import ApplicationNewPage from './pages/ApplicationNewPage';
+import ApplicationPage from './pages/ApplicationPage';
 
 import useAuthStore from './stores/useAuth';
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/application/new" element={<ApplicationNewPage />} />
+          <Route path="/application/:uid" element={<ApplicationPage />} />
         </Route>
       </Routes>}
 

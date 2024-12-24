@@ -27,8 +27,8 @@ function SettingsPage() {
             <li><strong>SEAVO</strong></li>
           </ul>
           <ul>
-            <li><NavLink to="/" className={'contrast'}>Dashboard</NavLink></li>
-            <li><NavLink to="/settings" className={'contrast'}>Settings</NavLink></li>
+            <li><NavLink to="/" className={'secondary'}>Dashboard</NavLink></li>
+            <li><NavLink to="/settings" className={({ isActive }) => isActive ? "contrast" : ""}>Settings</NavLink></li>
           </ul>
         </nav>
 
